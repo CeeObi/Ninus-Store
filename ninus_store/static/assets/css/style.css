@@ -1,7 +1,15 @@
-body{
-    background-image:url("https://images.unsplash.com/photo-1604147706283-d7119b5b822c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8cGxhaW4lMjBiYWNrZ3JvdW5kfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60");;
-}
-
 h1 {
     color:blue;
+}
+
+.btn-outline-secondary {
+    padding-right:70px;
+     padding-left:70px;
+     width:250px;
+     border-color: #1D011D;
+     color: #1D011D;
+}
+.btn-outline-secondary:hover {
+
+
 }
