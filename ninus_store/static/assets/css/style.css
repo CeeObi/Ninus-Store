@@ -1,6 +1,6 @@
 h1{
-    color: green;
-    background-color: red;
+    color: white;
+    background-color:green;
 }
 h2{color:yellow}
 
@@ -18,11 +18,13 @@ h2{color:yellow}
     width:240px; /* Yeap you can change the width and height*/
     height:500px;
 }
+
 @media (min-width: 1200px) {
   .container {
       max-width: 1330px;
   }
 }
+
 .product-image{
 position: relative;
 }
@@ -56,4 +58,9 @@ position: relative;
 
 .product-image:hover .product-hover-overlay-buttons{
      opacity: 1;
+}
+
+.bg-gray-100{
+background-color: #dbd9d9;
+
 }
