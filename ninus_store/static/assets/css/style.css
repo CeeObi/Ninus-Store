@@ -1,6 +1,6 @@
 h1{
-    color: red;
-    background-color: grey;
+    color: green;
+    background-color: red;
 }
 h2{color:yellow}
 
@@ -22,4 +22,38 @@ h2{color:yellow}
   .container {
       max-width: 1330px;
   }
+}
+.product-image{
+position: relative;
+}
+
+.product-hover-overlay1{
+    opacity: 1;
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: .5s ease;
+    backface-visibility: hidden;
+}
+
+
+.product-hover-overlay-buttons{
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+
+ }
+
+.product-image:hover img{
+     opacity: 0.3;
+}
+
+.product-image:hover .product-hover-overlay-buttons{
+     opacity: 1;
 }
