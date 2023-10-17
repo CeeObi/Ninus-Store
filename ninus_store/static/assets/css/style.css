@@ -2,7 +2,15 @@ h1{
     color: white;
     background-color:green;
 }
-h2{color:yellow}
+h2{color:yellow};
+
+.footer-bg-a{
+    background-color: #f2f0f0;
+}
+
+.footer-bg-b{
+    background-color: #b8b6b6;
+}
 
 .btn-outline-secondary {
     padding-right:70px;
