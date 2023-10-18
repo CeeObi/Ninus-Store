@@ -72,3 +72,10 @@ position: relative;
 background-color: #dbd9d9;
 
 }
+
+.carousel-indicators{
+  position: absolute; top: 0%;  left: 0%;  transform: translate(0%, 0%);
+}
+ #yes{
+ color:red
+ }
