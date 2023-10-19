@@ -1,6 +1,6 @@
 h1{
     color: white;
-    background-color:#1D011D;
+    background-color:yellow;
 }
 h2{color:yellow};
 
@@ -78,4 +78,13 @@ background-color: #dbd9d9;
 
  #yes{
  color:red
+ }
+
+.productmini{
+    opacity:0.5;
+ }
+
+
+ .productmini:active{
+    opacity:1;
  }
