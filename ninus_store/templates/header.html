@@ -22,11 +22,10 @@
         </a>
 
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+          <li><a href="{% url 'home' %}" class="nav-link px-2 text-secondary">HOME</a></li>
+          <li><a href="{% url 'catalog' %}" class="nav-link px-2 text-white">SHOP</a></li>
+            <li><a href="#" class="nav-link px-2 text-white">ABOUT</a></li>
+          <li><a href="#" class="nav-link px-2 text-white">CONTACT</a></li>
         </ul>
 
         <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
@@ -40,7 +39,7 @@
               <a class="btn ml-2 btn-outline-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="bi bi-cart4"><span class="rounded-circle border border-dark pr-1 text-center bg-dark text-white"  >1</span></i>
               </a>
-            <div class="border shadow border-dark rounded col dropdown-menu" aria-labelledby="dropdownMenuLink1">
+            <div class="shadow rounded-0 col dropdown-menu" aria-labelledby="dropdownMenuLink1">
               <div class="col d-flex justify-content-center pl-0 ml-0 pr-4"><!-- Item1 start-->
                 <div class="row dropdown-item col d-flex justify-content-center mx-0 pl-0 pr-1">
                   <div class="row ">
