@@ -4,4 +4,4 @@ from django.shortcuts import render
 
 # Create your views here.
 def index(request):
-    return render(request,"checkout_mini.html")
+    return render(request,"modalpop.html")
