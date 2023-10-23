@@ -1,9 +1,3 @@
-from django.http import HttpResponse
-from django.shortcuts import render
-#from data import data
-import random
-
-
 data =["https://images.unsplash.com/photo-1683849117195-83517b362436?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTI4fHx3aGl0ZSUyMGJhY2tncm91bmQlMjB3b21lbiUyMGZhc2hpb258ZW58MHx8MHx8fDA%3D",
 "https://images.unsplash.com/photo-1630255733678-cf82ac59eef8?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjI0fHx3aGl0ZSUyMGJhY2tncm91bmQlMjB3b21lbiUyMGZhc2hpb258ZW58MHx8MHx8fDA%3D",
 "https://images.pexels.com/photos/7290682/pexels-photo-7290682.jpeg?auto=compress&cs=tinysrgb&w=600",
@@ -56,45 +50,3 @@ data =["https://images.unsplash.com/photo-1683849117195-83517b362436?auto=format
 "https://images.pexels.com/photos/7203743/pexels-photo-7203743.jpeg?auto=compress&cs=tinysrgb&w=600",
 "https://images.pexels.com/photos/6311274/pexels-photo-6311274.jpeg?auto=compress&cs=tinysrgb&w=600",
 ]
-
-
-data_index = []
-for index in range(0, len(data)):
-    indx = index + 1
-    data_index.append({"id":indx, "url":data[index]})
-
-
-
-def index(request):
-    return render(request,"home.html")
-
-
-#print(data)
-
-def catalog(request):
-    context={}
-    #global data
-    context["cntx_data"]=data_index
-    return render(request,"catalog.html",context=context)
-
-def catalog2(request):
-    context={}
-    #global data
-    context["data"]=data
-    return render(request,"catalog2.html",context=context)
-
-def product_detail(request,id):
-    context={}
-    data_reduced=data_index
-    id = int(id)
-    for item in data_index:
-        if item["id"]==id:
-            idz_url=item["url"]
-            context["cntx_url"] = idz_url
-    random_data= random.choices(data_reduced, k=7)
-    for each in random_data[:6]:
-        if each["id"] == id:
-            indx=random_data.index(each)
-            random_data.pop(indx)
-    context["cntx_data_reduced"] = random_data[:6]
-    return render(request,"product_detail.html", context=context)
