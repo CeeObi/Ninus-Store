@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'ninus_store.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR/'db.sqlite3',
     }
 }
 
@@ -118,9 +118,9 @@ USE_TZ = True
 
 # STATIC_URL = 'static/'
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [BASE_DIR/"static"]
+STATICFILES_DIRS = [BASE_DIR / "static"]
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-STATIC_ROOT = os.path.join(PROJECT_ROOT,'static')
+STATIC_ROOT = os.path.join(PROJECT_ROOT , 'static')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
