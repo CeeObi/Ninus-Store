@@ -1,3 +1,14 @@
+
+
+cart_items={
+    "1":{
+        "Quantity":2,
+        "product_name": "Tee White",
+        "Description": "Lorem ipsum dolor sit amet."
+    }
+}
+
+
 data =["https://images.unsplash.com/photo-1683849117195-83517b362436?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTI4fHx3aGl0ZSUyMGJhY2tncm91bmQlMjB3b21lbiUyMGZhc2hpb258ZW58MHx8MHx8fDA%3D",
 "https://images.unsplash.com/photo-1630255733678-cf82ac59eef8?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjI0fHx3aGl0ZSUyMGJhY2tncm91bmQlMjB3b21lbiUyMGZhc2hpb258ZW58MHx8MHx8fDA%3D",
 "https://images.pexels.com/photos/7290682/pexels-photo-7290682.jpeg?auto=compress&cs=tinysrgb&w=600",

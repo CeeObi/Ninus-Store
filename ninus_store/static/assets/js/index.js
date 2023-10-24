@@ -1,6 +1,5 @@
-document.querySelector("h1").style.color="purple";
 document.querySelector("h1").style.fontSize="70px";
-document.querySelector("h1").style.color="purple";
+document.querySelector("h1").style.color="yellow";
 
 $('.pixz_sorc2').mouseover(function(){
     var img_modal_src=$(this).attr('src');
