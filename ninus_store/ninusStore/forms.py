@@ -91,4 +91,4 @@ class SignUpForm(AuthenticationForm):
     )
     class Meta:
         model = User
-        fields = ["firstname","lastname","username","password"]
+        fields_order = ["firstname","lastname","username","password"]
