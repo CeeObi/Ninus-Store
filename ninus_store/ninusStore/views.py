@@ -22,8 +22,13 @@ def index(request):
 
 def catalog(request):
     context={}
+    login = LoginForm()
+    signup = SignUpForm
+
     #global data
     context["cntx_data"]=data_index
+    context["login"] = login
+    context["signup"] = signup
     return render(request,"catalog.html",context=context)
 
 def cart(request):
@@ -47,12 +52,12 @@ def product_detail(request,id):
 
 
 def login(request):
-    login=LoginForm
-    return render(request,"login.html",context={"forms": login})
+    login=LoginForm()
+    return render(request,"login.html",context={"login": login})
 
 
 
 def signup(request):
     signup=SignUpForm
-    return render(request,"signup.html",context={"forms": signup})
+    return render(request,"signup.html",context={"signup": signup})
 
