@@ -1,5 +1,13 @@
+from django.contrib.auth import login,authenticate,logout
+from django.contrib.auth.hashers import make_password
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.urls import reverse
+from werkzeug.security import generate_password_hash
+from django.contrib import messages
+
 from .forms import LoginForm, SignUpForm
+from django.contrib.auth.models import User
 from .data import data, cart_items
 import random
 
@@ -22,9 +30,8 @@ def index(request):
 
 def catalog(request):
     context={}
-    login = LoginForm()
+    login = LoginForm
     signup = SignUpForm
-
     #global data
     context["cntx_data"]=data_index
     context["login"] = login
@@ -51,13 +58,61 @@ def product_detail(request,id):
     return render(request,"product_detail.html", context=context)
 
 
-def login(request):
-    login=LoginForm()
-    return render(request,"login.html",context={"login": login})
+def login_pg(request):
+    logn=LoginForm
+    if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        try:
+            user_exist = User.objects.filter(username=username).exists()
+            if user_exist:
+                hashed_password = password
+                print(hashed_password)
+                user = authenticate(request, username=username, password=hashed_password)
+                # user = User.objects.get(username=username)
+                # if user.check_password(password): #Another way to authenticate
+                if user is not None:
+                    login(request,user)
+                    return HttpResponseRedirect(reverse("home"))
+                else:
+                    messages.error(request, 'Incorrect login details.')
+                    return HttpResponseRedirect(reverse("login"))
+            else:
+                messages.error(request, 'User does not exist. Please signup!')
+                return HttpResponseRedirect(reverse("signup"))
+        except User.DoesNotExist:
+            return render(request, "login.html", context={"login": logn})
+    return render(request, "login.html", context={"login": logn})
 
 
 
-def signup(request):
+
+
+def signup_pg(request):
     signup=SignUpForm
-    return render(request,"signup.html",context={"signup": signup})
+    if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        email = request.POST.get('email')
+        firstname = request.POST.get('firstname')
+        lastname = request.POST.get('lastname')
+        try:
+            email_exist = User.objects.filter(email=email).exists()
+            user_exist = User.objects.filter(username=username).exists()
+            if user_exist or email_exist:
+                messages.error(request, 'User already exist.')
+                return HttpResponseRedirect(reverse("login"))
+            else:
+                hashed_password = make_password(password)
+                user = User.objects.create_user(first_name=firstname, last_name=lastname, username=username, email=email, password=hashed_password)
+                login(request, user)
+                return HttpResponseRedirect(reverse("home"))
+        except User.DoesNotExist:
+            return render(request, "signup.html", context={"signup": signup})
+    return render(request, "signup.html", context={"signup": signup})
+
+
+def logout_pg(request):
+    logout(request)
+    return HttpResponseRedirect(reverse("home"))
 

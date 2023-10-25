@@ -15,15 +15,25 @@
                 <h2>Signup</h2>
             </div>
         <div class="container d-flex justify-content-center ">
-            <form action="" class="row w-100 d-flex justify-content-center ">
+            <form action="{% url 'signup' %}" method="POST" class="row w-100 d-flex justify-content-center ">
+                 {% csrf_token %}
                 <div class="col-12  d-flex justify-content-center text-white" >
                     <div class="row mb-4 ">
                         {{signup}}
                     </div>
                 </div>
                 <div class="col-12 d-flex justify-content-start text-white px-0">
+                    {% if messages %}
+                    <div class="messages my-1 bg-warning">
+                        {% for message in messages %}
+                        <h5 {% if message.tags %} class="{{ message.tags }}"{% endif %}> {{ message }} </h5>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="col-12 d-flex justify-content-start text-white px-0">
                     <div class="col-6 mx-0 px-0">
-                        <input class="btn btn-warning px-5" type="button" value="Signup">
+                        <input class="btn btn-warning px-5" type="submit" value="Signup">
                     </div>
                 </div>
             </form>
