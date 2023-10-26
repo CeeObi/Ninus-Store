@@ -5,43 +5,30 @@ from django.urls import reverse
 from django.contrib import messages
 from .forms import LoginForm, SignUpForm
 from django.contrib.auth.models import User
-from.models import Product,Wishlist,Purchase,Collection,Order
-from .data import data, cart_items
+from .products_api import StoreData
 import random
 
+storedata = StoreData() #initializes store data in products_api
 
 
-colname="Jackets and Tops"
-products=Product.objects.all()
-# collections = products.collection.filter(col_name=colname)
-collections_list = []
-for product in products:
-    if product.collection.col_name.lower() == "Jackets and Tops".lower():
-        collections_list.append(product)
-print(collections_list)
-
-
-data_index = []
-for index in range(0, len(data)):
-    indx = index + 1
-    data_index.append({"id":indx, "url":data[index]})
 
 
 def index(request):
     return render(request,"home.html")
 
 
-#print(data)
-
-
 def catalog(request):
     context={}
     login = LoginForm
     signup = SignUpForm
-    #global data
-    context["cntx_data"]=data_index
+
+    #collname="Jackets and Tops"
+    collname = "all"
+    product_collection = storedata.get_collection(collname=collname) #has been initialized above
+    context["cntx_data"]=product_collection["collectionslist"]
     context["login"] = login
     context["signup"] = signup
+    context["collection_title"] = product_collection["collection_title"].title()
     return render(request,"catalog.html",context=context)
 
 
@@ -51,18 +38,20 @@ def cart(request):
 
 def product_detail(request,id):
     context={}
-    data_reduced=data_index
+    product_collection = storedata.get_collection(collname="all")
+    colctn_data=product_collection["collectionslist"]
     id = int(id)
-    for item in data_index:
+    for item in colctn_data:
         if item["id"]==id:
-            idz_url=item["url"]
-            context["cntx_url"] = idz_url
-    random_data= random.choices(data_reduced, k=7)
+            idz_url=item["img_url"]
+            context["cntx_img_url"] = idz_url
+    random_data= random.choices(colctn_data, k=7)
     for each in random_data[:6]:
         if each["id"] == id:
             indx=random_data.index(each)
             random_data.pop(indx)
-    context["cntx_data_reduced"] = random_data[:6]
+    context["cntx_data"] = random_data[:6]
+
     return render(request,"product_detail.html", context=context)
 
 
