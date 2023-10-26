@@ -61,15 +61,14 @@ def product_detail(request,id):
 def login_pg(request):
     logn=LoginForm
     if request.method == "POST":
-        username = request.POST.get('username')
+        usernme = request.POST.get('username')
         password = request.POST.get('password')
         try:
-            user_exist = User.objects.filter(username=username).exists()
+            user_exist = User.objects.filter(username=usernme).exists()
             if user_exist:
-                hashed_password = password
-                print(hashed_password)
-                user = authenticate(request, username=username, password=hashed_password)
-                # user = User.objects.get(username=username)
+                username = User.objects.get(username=usernme)
+                user = authenticate(request, username=username, password=password)
+
                 # if user.check_password(password): #Another way to authenticate
                 if user is not None:
                     login(request,user)
@@ -103,8 +102,7 @@ def signup_pg(request):
                 messages.error(request, 'User already exist.')
                 return HttpResponseRedirect(reverse("login"))
             else:
-                hashed_password = make_password(password)
-                user = User.objects.create_user(first_name=firstname, last_name=lastname, username=username, email=email, password=hashed_password)
+                user = User.objects.create_user(first_name=firstname, last_name=lastname, username=username, email=email, password=password)
                 login(request, user)
                 return HttpResponseRedirect(reverse("home"))
         except User.DoesNotExist:
