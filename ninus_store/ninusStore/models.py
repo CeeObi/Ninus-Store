@@ -6,14 +6,14 @@ class Wishlist(models.Model):
     wish_name = models.CharField(max_length=255)
     wishlist_owner = models.ForeignKey(User, on_delete=models.CASCADE)
     def __str__(self):
-        return "Wishlist table created..."
+        return f"{self.wish_name}"
 
 
 # Create your models here.
 class Collection(models.Model):
     col_name = models.CharField(max_length=255)
     def __str__(self):
-        return "Collection table created..."
+        return f"{self.col_name}"
 
 
 class Product(models.Model):
@@ -41,7 +41,7 @@ class Product(models.Model):
     collection = models.ForeignKey(Collection, on_delete=models.CASCADE)
     discount_amount = models.IntegerField(default=0)
     def __str__(self):
-        return "Product table created..."
+        return f"{self.prod_name}"
 
 
 class Order(models.Model):
@@ -49,7 +49,7 @@ class Order(models.Model):
     order_name = models.CharField(max_length=255)
     ordered_by = models.ForeignKey(User, on_delete=models.CASCADE)
     def __str__(self):
-        return "Order table created..."
+        return f"{self.order_name}"
 
 
 class Purchase(models.Model):
@@ -57,7 +57,7 @@ class Purchase(models.Model):
     order_id = models.ForeignKey(Order, on_delete=models.CASCADE)
     quantity = models.IntegerField()
     def __str__(self):
-        return "Purchase table created..."
+        return f"{self.purchased_item}"
 
 
 
