@@ -1,18 +1,24 @@
 from django.contrib.auth import login,authenticate,logout
-from django.contrib.auth.hashers import make_password
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
-from werkzeug.security import generate_password_hash
 from django.contrib import messages
-
 from .forms import LoginForm, SignUpForm
 from django.contrib.auth.models import User
+from.models import Product,Wishlist,Purchase,Collection,Order
 from .data import data, cart_items
 import random
 
 
 
+colname="Jackets and Tops"
+products=Product.objects.all()
+# collections = products.collection.filter(col_name=colname)
+collections_list = []
+for product in products:
+    if product.collection.col_name.lower() == "Jackets and Tops".lower():
+        collections_list.append(product)
+print(collections_list)
 
 
 data_index = []
@@ -21,12 +27,12 @@ for index in range(0, len(data)):
     data_index.append({"id":indx, "url":data[index]})
 
 
-
 def index(request):
     return render(request,"home.html")
 
 
 #print(data)
+
 
 def catalog(request):
     context={}
@@ -38,8 +44,10 @@ def catalog(request):
     context["signup"] = signup
     return render(request,"catalog.html",context=context)
 
+
 def cart(request):
     return render(request,"cart.html")
+
 
 def product_detail(request,id):
     context={}
@@ -68,7 +76,6 @@ def login_pg(request):
             if user_exist:
                 username = User.objects.get(username=usernme)
                 user = authenticate(request, username=username, password=password)
-
                 # if user.check_password(password): #Another way to authenticate
                 if user is not None:
                     login(request,user)
@@ -82,9 +89,6 @@ def login_pg(request):
         except User.DoesNotExist:
             return render(request, "login.html", context={"login": logn})
     return render(request, "login.html", context={"login": logn})
-
-
-
 
 
 def signup_pg(request):

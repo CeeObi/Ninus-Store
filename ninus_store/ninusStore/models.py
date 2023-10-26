@@ -1,3 +1,4 @@
+from datetime import date
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -45,7 +46,7 @@ class Product(models.Model):
 
 
 class Order(models.Model):
-    order_date = models.DateTimeField()
+    order_date = models.DateTimeField(default=date.today)
     order_name = models.CharField(max_length=255)
     ordered_by = models.ForeignKey(User, on_delete=models.CASCADE)
     def __str__(self):
