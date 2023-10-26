@@ -32,6 +32,7 @@ class Product(models.Model):
         ("C", "College"),
     )
     prod_name = models.CharField(max_length=255)
+    img_url = models.CharField(max_length=2000)
     price = models.FloatField(max_length=255)
     color = models.CharField(max_length=9, choices=COLOR_CHOICES, default="BLACK")
     size = models.CharField(max_length=9, choices=SIZE_CHOICES, default="S")
