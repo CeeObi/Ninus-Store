@@ -11,8 +11,6 @@ import random
 storedata = StoreData() #initializes store data in products_api
 
 
-
-
 def index(request):
     return render(request,"home.html")
 
@@ -23,7 +21,24 @@ def catalog(request):
     signup = SignUpForm
 
     #collname="Jackets and Tops"
-    collname = "all"
+    collname = "all collections"
+
+    product_collection = storedata.get_collection(collname=collname) #has been initialized above
+    context["cntx_data"]=product_collection["collectionslist"]
+    context["login"] = login
+    context["signup"] = signup
+    context["collection_title"] = product_collection["collection_title"].title()
+    return render(request,"catalog.html",context=context)
+
+
+def catalog_collections(request):
+    context={}
+    login = LoginForm
+    signup = SignUpForm
+
+    #collname="Jackets and Tops"
+    collname = "all collections"
+
     product_collection = storedata.get_collection(collname=collname) #has been initialized above
     context["cntx_data"]=product_collection["collectionslist"]
     context["login"] = login
@@ -38,7 +53,7 @@ def cart(request):
 
 def product_detail(request,id):
     context={}
-    product_collection = storedata.get_collection(collname="all")
+    product_collection = storedata.get_collection(collname="all collections")
     colctn_data=product_collection["collectionslist"]
     id = int(id)
     for item in colctn_data:
