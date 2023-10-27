@@ -39,7 +39,7 @@ class Product(models.Model):
     size = models.CharField(max_length=9, choices=SIZE_CHOICES, default="S")
     prod_type = models.CharField(max_length=9, choices=TYPE_CHOICES, default="H")
     wishlist = models.ForeignKey(Wishlist, on_delete=models.CASCADE,default="All Products")
-    collection = models.ForeignKey(Collection, on_delete=models.CASCADE)
+    collection = models.ForeignKey(Collection, on_delete=models.CASCADE, default="Jackets and Tops")
     discount_amount = models.IntegerField(default=0)
     def __str__(self):
         return f"{self.prod_name}"
@@ -59,6 +59,11 @@ class Purchase(models.Model):
     quantity = models.IntegerField()
     def __str__(self):
         return f"{self.purchased_item}"
+
+
+class UserCart(models.Model):
+    pass
+
 
 
 

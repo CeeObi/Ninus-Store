@@ -15,31 +15,11 @@ def index(request):
     return render(request,"home.html")
 
 
-def catalog(request):
+def catalog(request,title):
     context={}
     login = LoginForm
     signup = SignUpForm
-
-    #collname="Jackets and Tops"
-    collname = "all collections"
-
-    product_collection = storedata.get_collection(collname=collname) #has been initialized above
-    context["cntx_data"]=product_collection["collectionslist"]
-    context["login"] = login
-    context["signup"] = signup
-    context["collection_title"] = product_collection["collection_title"].title()
-    return render(request,"catalog.html",context=context)
-
-
-def catalog_collections(request):
-    context={}
-    login = LoginForm
-    signup = SignUpForm
-
-    #collname="Jackets and Tops"
-    collname = "all collections"
-
-    product_collection = storedata.get_collection(collname=collname) #has been initialized above
+    product_collection = storedata.get_collection(collname=title) #has been initialized above, "Jackets and Tops", "all collections"
     context["cntx_data"]=product_collection["collectionslist"]
     context["login"] = login
     context["signup"] = signup
@@ -53,20 +33,27 @@ def cart(request):
 
 def product_detail(request,id):
     context={}
-    product_collection = storedata.get_collection(collname="all collections")
-    colctn_data=product_collection["collectionslist"]
+    spec_product = storedata.get_product(product_id=id)
+    colctn_data=storedata.get_collection(collname="all collections")["collectionslist"] #should use 'storedata.products' only, but it is not presently populated at the admin.
     id = int(id)
-    for item in colctn_data:
-        if item["id"]==id:
-            idz_url=item["img_url"]
-            context["cntx_img_url"] = idz_url
-    random_data= random.choices(colctn_data, k=7)
-    for each in random_data[:6]:
-        if each["id"] == id:
-            indx=random_data.index(each)
-            random_data.pop(indx)
-    context["cntx_data"] = random_data[:6]
+    if request.method == "POST":
+        id = id
+        product_type = request.POST.get("options")
+        product_size = request.POST.get("product_size")
+        product_quantity = request.POST.get("quantity")
+        print(product_quantity)
 
+
+
+
+    #For the GET method
+    context["spec_product"] = spec_product
+    random_data= random.choices(colctn_data, k=7)
+    items_may_like=[]
+    for each in random_data[:6]:
+        if each['id'] != id: #changes to 'if each.id != id:' when 'storedata.product' is used above.
+            items_may_like.append(each)
+    context["cntx_data"] = items_may_like[:6]
     return render(request,"product_detail.html", context=context)
 
 

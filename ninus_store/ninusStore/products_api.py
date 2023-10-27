@@ -13,6 +13,7 @@ for index in range(0, len(data)):
 class StoreData():
     def __init__(self):
         self.products=Product.objects.all()
+        self.product=Product.objects
     def get_collection(self,collname):
         try:
             if collname.lower() == "all collections".lower():
@@ -30,6 +31,14 @@ class StoreData():
             all_collections=[]
             return {"collection_title": collname.title(),
              "collectionslist": all_collections}
+
+    def get_product(self,product_id):
+        try:
+            product = self.product.get(id=product_id)
+            return product
+        except:
+            return
+
 
 
 

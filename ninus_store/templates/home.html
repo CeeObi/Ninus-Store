@@ -10,11 +10,11 @@
 <body >
 <header class="masthead d-flex container-fluid align-items-end justify-content-center" style="background-image: url('./static/images/backgroundreal.png'); background-size: cover; height:850px;">
     <div class="" style="margin-bottom: 85px" >
-            <a class=" btn btn-outline-secondary btn-lg rounded-0"   href="{% url 'catalog' %}">SHOP NOW</a>
+            <a class=" btn btn-outline-secondary btn-lg rounded-0"   href="{% url 'catalog' title='All Collections' %}">SHOP NOW</a>
     </div>
 </header>
 <div>
-    <a class="btn btn-dark" href="">Jackets and tops</a>
+    <a class="btn btn-dark" href="{% url 'catalog' title='Jackets and tops' %}" >Jackets and tops</a>
     <a class="btn btn-dark" href="">Men</a>
 </div>
 </body>
