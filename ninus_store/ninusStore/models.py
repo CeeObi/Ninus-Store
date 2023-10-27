@@ -38,7 +38,7 @@ class Product(models.Model):
     color = models.CharField(max_length=9, choices=COLOR_CHOICES, default="BLACK")
     size = models.CharField(max_length=9, choices=SIZE_CHOICES, default="S")
     prod_type = models.CharField(max_length=9, choices=TYPE_CHOICES, default="H")
-    wishlist = models.ForeignKey(Wishlist, on_delete=models.CASCADE)
+    wishlist = models.ForeignKey(Wishlist, on_delete=models.CASCADE,default="All Products")
     collection = models.ForeignKey(Collection, on_delete=models.CASCADE)
     discount_amount = models.IntegerField(default=0)
     def __str__(self):
