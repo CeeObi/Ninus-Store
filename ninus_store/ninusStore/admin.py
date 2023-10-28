@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Collection,Order,Product,Wishlist,Purchase
+from .models import Collection,Order,Product,Wishlist,Purchase,Cart,UserCart
 
 
 class ProductInline(admin.StackedInline):
@@ -30,3 +30,5 @@ admin.site.register(Order,OrderAdmin)
 admin.site.register(Product)
 admin.site.register(Wishlist,WishlistAdmin)
 admin.site.register(Purchase)
+admin.site.register(Cart)
+admin.site.register(UserCart)

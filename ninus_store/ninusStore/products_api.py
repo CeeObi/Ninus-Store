@@ -1,4 +1,6 @@
-from .models import Product,Wishlist,Purchase,Collection,Order
+from django.contrib.auth.models import User
+
+from .models import Product, Wishlist, Purchase, Collection, Order, Cart, UserCart
 from .data import data, cart_items
 
 
@@ -40,5 +42,18 @@ class StoreData():
             return
 
 
+
+class CartData():
+    def __init__(self):
+        self.cart_items = Cart.objects.all()
+    def update_cart(self,product_id,product_name,product_img_url,product_type,product_size,product_quantity,product_price):
+        cart_item = Cart( product_id=product_id,product_name=product_name,product_img_url=product_img_url,product_type=product_type,product_size=product_size,product_quantity=product_quantity,product_price=product_price)
+        cart_item.save()
+
+    def get_cart_items(self):
+        return self.cart_items
+
+    def count_cart_items(self):
+        return self.cart_items.count()
 
 

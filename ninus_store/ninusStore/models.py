@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, datetime
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -60,9 +60,22 @@ class Purchase(models.Model):
     def __str__(self):
         return f"{self.purchased_item}"
 
-
 class UserCart(models.Model):
-    pass
+    cart_owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    cart_date_created = models.DateTimeField(default=datetime.now())
+
+
+class Cart(models.Model):
+    product_id = models.IntegerField()
+    product_name = models.CharField(max_length=255)
+    product_img_url = models.CharField(max_length=2000)
+    product_price = models.FloatField(max_length=255,null=True)
+    product_type = models.CharField(max_length=255)
+    product_size = models.CharField(max_length=255)
+    product_quantity = models.IntegerField()
+
+
+
 
 
 
