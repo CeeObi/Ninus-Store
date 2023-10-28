@@ -36,16 +36,10 @@ def cart(request):
 def product_detail(request,id):
     context={}
     spec_product = storedata.get_product(product_id=id)
-    colctn_data=storedata.get_collection(collname="all collections")["collectionslist"] #should use 'storedata.products' only, but it is not presently populated at the admin.
     id = int(id)
     # For the GET method
     context["spec_product"] = spec_product
-    random_data = random.choices(colctn_data, k=7)
-    items_may_like = []
-    for each in random_data[:6]:
-        if each['id'] != id:  # changes to 'if each.id != id:' when 'storedata.product' is used above.
-            items_may_like.append(each)
-    context["cntx_data"] = items_may_like[:6]
+    context["cntx_data"] = storedata.get_random_products(id=id)
     context["cart_items"] = cartdata.get_cart_items()
     context["no_of_cart_items"] = cartdata.count_cart_items()
     if request.method == "POST":
@@ -71,14 +65,8 @@ def items_cart(request,product_id,in_cart_id):
     cartdata.delete_cart_item(in_cart_id)
     #Query Products
     spec_product = storedata.get_product(product_id=id)
-    colctn_data = storedata.get_collection(collname="all collections")["collectionslist"]
     context["spec_product"] = spec_product
-    random_data = random.choices(colctn_data, k=7)
-    items_may_like = []
-    for each in random_data[:6]:
-        if each['id'] != id:  # changes to 'if each.id != id:' when 'storedata.product' is used above.
-            items_may_like.append(each)
-    context["cntx_data"] = items_may_like[:6]
+    context["cntx_data"] = storedata.get_random_products(id=id)
     context["cart_items"] = cartdata.get_cart_items()
     context["no_of_cart_items"] = cartdata.count_cart_items()
     return render(request,"product_detail.html", context=context)

@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
-
 from .models import Product, Wishlist, Purchase, Collection, Order, Cart, UserCart
-from .data import data, cart_items
+from .data import data
+import random
 
 
 
@@ -33,13 +33,22 @@ class StoreData():
             all_collections=[]
             return {"collection_title": collname.title(),
              "collectionslist": all_collections}
-
     def get_product(self,product_id):
         try:
             product = self.product.get(id=product_id)
             return product
         except:
             return
+    def get_random_products(self,id):
+        colctn_data = data_index #Product.objects.all()
+        random_data = random.choices(colctn_data, k=7)
+        items_may_like = []
+        for each in random_data[:6]:
+            if each['id'] != id:  # changes to 'if each.id != id:' when 'storedata.product' is used above.
+                items_may_like.append(each)
+        return items_may_like[:6]
+
+
 
 
 

@@ -44,7 +44,7 @@
                     {% endif %}
                     <!-- start dropdown show below: -->
                       <a class="btn ml-2 btn-outline-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink1x" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="bi bi-cart4">{% if no_of_cart_items%}<span class="rounded-circle border border-dark pr-1 text-center bg-dark text-white"  > {{no_of_cart_items}}</span>{% endif %}</i>
+                            <i class="bi bi-cart4">{% if no_of_cart_items%}<span class="rounded-circle border-0 pr-1 text-center bg-transparent text-white"  > {{no_of_cart_items}}</span>{% endif %}</i>
                       </a>
                     <div class="shadow rounded-0 col dropdown-menu pr-0" aria-labelledby="dropdownMenuLink1x">
                         {% for eachitem in cart_items %}

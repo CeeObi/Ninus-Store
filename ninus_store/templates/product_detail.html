@@ -49,7 +49,7 @@
               <nav aria-label="breadcrumb" class="mb-0 pb-0">
                   <ol class="breadcrumb justify-content-start mb-0 pb-0">
                     <li class="breadcrumb-item mb-0 pb-0"><a class="mb-0 pb-0" href="/">Home</a></li>
-                    <li class="breadcrumb-item mb-0 pb-0"><a class=" mb-0 pb-0" href="{% url 'catalog' title='Jackets and tops' %}">{{spec_product.collection.col_name}}</a></li>
+                    <li class="breadcrumb-item mb-0 pb-0"><a class=" mb-0 pb-0" href="{% url 'catalog' title=spec_product.collection.col_name %}">{{spec_product.collection.col_name}}</a></li>
                     <li class="breadcrumb-item active mb-0 pb-0" aria-current="page">{{spec_product.prod_name}} </li>
                   </ol>
              </nav>
