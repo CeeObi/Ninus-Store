@@ -74,17 +74,18 @@
              <p class="mr-5 mb-4 text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
             </div>
             <div>
-              <form class="">
+              <form id="modal_name_2" class="" action="place holder here" method="POST">
+                  {% csrf_token %}
                 <div class="container-fluid">
                   <div class="row">
                     <div class="mb-4 col col-xl-6 col-lg-6 col-sm-6">
                       <h6 class="detail-option-heading">Type <span>(required)</span></h6>
                       <div class="btn-group btn-group-toggle w-25" data-toggle="buttons">
                         <label class="btn btn-sm btn-outline-secondary active ml-0 w-25  rounded-0 d-flex justify-content-center">
-                          <input class="ml-0 " type="radio" name="options" id="option1" autocomplete="off" checked> Hoodie
+                          <input class="ml-0 " type="radio" name="options" id="option1" autocomplete="off" checked value="Hoodie"> Hoodie
                         </label>
                         <label class="btn btn-sm btn-outline-secondary mx-1 w-25  rounded-0 d-flex justify-content-center">
-                          <input class="mx-1 " type="radio" name="options" id="option2" autocomplete="off"> College
+                          <input class="mx-1 " type="radio" name="options" id="option2" autocomplete="off" value="College"> College
                         </label>
                       </div>
                     </div>
@@ -95,11 +96,11 @@
                       <div class="btn-group-sm btn-group-toggle" role="group" aria-label="Basic radio toggle button group" data-toggle="buttons">
                         <label class="btn btn-outline-dark active rounded-0" for="btnradio1">
     <!--                      chaning to outline-secondary would affect button size because it was defined in style.css-->
-                          <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>SMALL</label>
+                          <input type="radio" class="btn-check" name="product_size" id="btnradio1" autocomplete="off" checked value="Small">SMALL</label>
                         <label class="btn btn-outline-dark rounded-0" for="btnradio2">
-                          <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">MEDIUM</label>
+                          <input type="radio" class="btn-check" name="product_size" id="btnradio2" autocomplete="off" value="Medium">MEDIUM</label>
                         <label class="btn btn-outline-dark rounded-0" for="btnradio3">
-                          <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">LARGE</label>
+                          <input type="radio" class="btn-check" name="product_size" id="btnradio3" autocomplete="off" value="Large">LARGE</label>
                       </div>
                     </div>
                   </div><!--              row size end-->
@@ -110,13 +111,13 @@
                       </div>
                       <div class="row ">
                         <div class="input-group mx-0 w-25 col-8 col-lg-4 col-xl-8">
-                          <input name="items" type="number" class="rounded-0 form-control d-inline m-0 w-25" value="1">
-                          <a href="" class="btn btn-dark m-0 d-inline rounded-0 form-control form-check-input w-75 ">
+                          <input name="quantity" type="number" class="rounded-0 form-control d-inline m-0 w-25" value="1">
+                          <button type="submit" href="" class="btn btn-dark m-0 d-inline rounded-0 form-control form-check-input w-75 ">
                             <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="cart-shopping" class="svg-inline--fa fa-cart-shopping mx-0 " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
                               <path fill="currentColor" d="M24 0C10.7 0 0 10.7 0 24S10.7 48 24 48H76.1l60.3 316.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24-10.7 24-24s-10.7-24-24-24H179.9l-9.1-48h317c14.3 0 26.9-9.5 30.8-23.3l54-192C578.3 52.3 563 32 541.8 32H122l-2.4-12.5C117.4 8.2 107.5 0 96 0H24zM176 512c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm336-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48z"></path>
                             </svg>
                             Add to Cart
-                          </a>
+                          </button>
                         </div>
                       </div>
                     </div>

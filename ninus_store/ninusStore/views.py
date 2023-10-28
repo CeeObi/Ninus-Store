@@ -23,7 +23,7 @@ def catalog(request,title):
     context["cntx_data"]=product_collection["collectionslist"]
     context["login"] = login
     context["signup"] = signup
-    context["collection_title"] = product_collection["collection_title"].title()
+    context["collection_title"] = product_collection["collectionstitle"].title()
     context["cart_items"] = cartdata.get_cart_items()
     context["no_of_cart_items"] = cartdata.count_cart_items()
     return render(request,"catalog.html",context=context)

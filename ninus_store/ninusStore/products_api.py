@@ -20,14 +20,14 @@ class StoreData():
         try:
             if collname.lower() == "all collections".lower():
                 all_collections = data_index     #self.products     # data_index
-                return { "collection_title":collname.title(),
+                return { "collectionstitle":collname.title(),
                          "collectionslist":all_collections }
             else:
                 all_collections=[]
                 for product in self.products:
                     if product.collection.col_name.lower() == collname.lower():
                         all_collections.append(product)
-                return {"collection_title": collname.title(),
+                return {"collectionstitle": collname.title(),
                         "collectionslist": all_collections}
         except:
             all_collections=[]
