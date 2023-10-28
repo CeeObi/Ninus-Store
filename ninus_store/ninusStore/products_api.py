@@ -45,15 +45,15 @@ class StoreData():
 
 class CartData():
     def __init__(self):
-        self.cart_items = Cart.objects.all()
+        pass
     def update_cart(self,product_id,product_name,product_img_url,product_type,product_size,product_quantity,product_price):
         cart_item = Cart( product_id=product_id,product_name=product_name,product_img_url=product_img_url,product_type=product_type,product_size=product_size,product_quantity=product_quantity,product_price=product_price)
         cart_item.save()
-
     def get_cart_items(self):
-        return self.cart_items
-
+        return Cart.objects.all()
     def count_cart_items(self):
-        return self.cart_items.count()
-
+        return Cart.objects.count()
+    def delete_cart_item(self,in_cart_id):
+        Cart.objects.filter(id=in_cart_id).delete()
+        return
 

@@ -1,5 +1,5 @@
 from django.contrib.auth import login,authenticate,logout
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from django.urls import reverse
 from django.contrib import messages
@@ -24,6 +24,8 @@ def catalog(request,title):
     context["login"] = login
     context["signup"] = signup
     context["collection_title"] = product_collection["collection_title"].title()
+    context["cart_items"] = cartdata.get_cart_items()
+    context["no_of_cart_items"] = cartdata.count_cart_items()
     return render(request,"catalog.html",context=context)
 
 
@@ -44,7 +46,8 @@ def product_detail(request,id):
         if each['id'] != id:  # changes to 'if each.id != id:' when 'storedata.product' is used above.
             items_may_like.append(each)
     context["cntx_data"] = items_may_like[:6]
-
+    context["cart_items"] = cartdata.get_cart_items()
+    context["no_of_cart_items"] = cartdata.count_cart_items()
     if request.method == "POST":
         product_id = id
         product_name = spec_product.prod_name
@@ -53,14 +56,39 @@ def product_detail(request,id):
         product_size = request.POST.get("product_size")
         product_quantity = request.POST.get("quantity")
         product_price = spec_product.price
-        print(type(product_price))
-        username = request.user.username
         cartdata.update_cart( product_id= product_id,product_name=product_name,product_img_url=product_img_url,product_type=product_type,product_size=product_size,product_quantity=product_quantity,product_price=product_price)
         context["cart_items"] = cartdata.get_cart_items()
-        context["no_of_cart_items"]=cartdata.count_cart_items()
-        print(context["no_of_cart_items"])
+        context["no_of_cart_items"] = cartdata.count_cart_items()
         return render(request,"product_detail.html", context=context)
     return render(request,"product_detail.html", context=context)
+
+
+
+def items_cart(request,product_id,in_cart_id):
+    context={}
+    id = int(product_id)
+    in_cart_id=in_cart_id
+    cartdata.delete_cart_item(in_cart_id)
+    #Query Products
+    spec_product = storedata.get_product(product_id=id)
+    colctn_data = storedata.get_collection(collname="all collections")["collectionslist"]
+    context["spec_product"] = spec_product
+    random_data = random.choices(colctn_data, k=7)
+    items_may_like = []
+    for each in random_data[:6]:
+        if each['id'] != id:  # changes to 'if each.id != id:' when 'storedata.product' is used above.
+            items_may_like.append(each)
+    context["cntx_data"] = items_may_like[:6]
+    context["cart_items"] = cartdata.get_cart_items()
+    context["no_of_cart_items"] = cartdata.count_cart_items()
+    return render(request,"product_detail.html", context=context)
+
+
+
+
+
+
+
 
 
 def login_pg(request):
