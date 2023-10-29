@@ -47,7 +47,7 @@ class Product(models.Model):
 
 class Order(models.Model):
     order_date = models.DateTimeField(default=date.today)
-    order_name = models.CharField(max_length=255)
+    order_name = models.CharField(max_length=255,default="admin")
     ordered_by = models.ForeignKey(User, on_delete=models.CASCADE)
     def __str__(self):
         return f"{self.order_name}"

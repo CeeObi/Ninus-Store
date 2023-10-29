@@ -1,5 +1,6 @@
+import stripe
 
-
+stripe.api_key="sk_test_51O6SWXGkFiiSNOyUdkF60f3ZGLj6X6zzX9Nskb2Psxqv67Am4z6oLR30Z7STFLcNgyKi9lqWDEjzTQOr5WadfIFl00JGiUcrMa"
 cart_items={
     "1":{
         "Quantity":2,
@@ -61,3 +62,17 @@ data =["https://images.unsplash.com/photo-1683849117195-83517b362436?auto=format
 "https://images.pexels.com/photos/7203743/pexels-photo-7203743.jpeg?auto=compress&cs=tinysrgb&w=600",
 "https://images.pexels.com/photos/6311274/pexels-photo-6311274.jpeg?auto=compress&cs=tinysrgb&w=600",
 ]
+
+
+#
+
+data_index = []
+for index in range(0, len(data)):
+    indx = index + 1
+    #print(data[index])
+    #stripe.Product.create(id=indx,name="White Tee",description=indx,images=[data[index]])
+    #stripe.Price.create(id=indx,unit_amount=19995, currency="aud", product=f"{indx}")
+#     #stripe.Product.delete(f"{indx}")
+# product=stripe.Product.retrieve("1")
+# print(product)
+

@@ -12,5 +12,7 @@ urlpatterns=[
   path('login',views.login_pg,name="login"),
   path('registration',views.signup_pg,name="signup"),
   path('logout',views.logout_pg,name="logout"),
+  path('create-checkout-session',views.create_checkout_session,name="checkout"),
+
 
 ]

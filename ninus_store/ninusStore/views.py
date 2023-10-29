@@ -6,10 +6,31 @@ from django.contrib import messages
 from .forms import LoginForm, SignUpForm
 from django.contrib.auth.models import User
 from .products_api import StoreData, CartData
-import random
+import requests
+import stripe
+
 
 storedata = StoreData() #initializes store data in products_api
 cartdata = CartData()
+
+YOUR_DOMAIN = 'http://localhost:8000'
+
+
+# @app.route('/create-checkout-session', methods=['POST'])
+def create_checkout_session():
+    try:
+        checkout_session = stripe.checkout.Session.create(
+            line_items=[{'price': '{{PRICE_ID}}','quantity': 1,},],
+            mode='payment',
+            success_url=YOUR_DOMAIN + '/checkout.html',
+            cancel_url=YOUR_DOMAIN + '/cancel.html',
+        )
+    except Exception as e:
+        return str(e)
+    return HttpResponseRedirect(reverse(checkout_session.url), code=303)
+
+
+
 
 def index(request):
     return render(request,"home.html")
