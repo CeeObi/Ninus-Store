@@ -65,13 +65,12 @@ data =["https://images.unsplash.com/photo-1683849117195-83517b362436?auto=format
 
 
 #
-
-data_index = []
-for index in range(0, len(data)):
-    indx = index + 1
-    #print(data[index])
-    #stripe.Product.create(id=indx,name="White Tee",description=indx,images=[data[index]])
-    #stripe.Price.create(id=indx,unit_amount=19995, currency="aud", product=f"{indx}")
+# #
+# data_index = []
+# for index in range(0, len(data)):
+#     indx = index + 1
+#     print(data[index])
+#     stripe.Product.create(id=indx,name="White Tee",description=indx,images=[data[index]], default_price_data = {"unit_amount_decimal":"19995", "currency":"aud"})
 #     #stripe.Product.delete(f"{indx}")
 # product=stripe.Product.retrieve("1")
 # print(product)

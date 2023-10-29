@@ -1,6 +1,51 @@
+from django.contrib.auth.models import User
 from .models import Product, Wishlist, Purchase, Collection, Order, Cart, UserCart
 from .data import data
 import random
+import stripe
+
+
+import stripe
+
+
+
+stripe.api_key="sk_test_51O6SWXGkFiiSNOyUdkF60f3ZGLj6X6zzX9Nskb2Psxqv67Am4z6oLR30Z7STFLcNgyKi9lqWDEjzTQOr5WadfIFl00JGiUcrMa"
+
+
+
+
+
+
+
+
+
+
+product=stripe.Product.retrieve("1")
+print(product)
+
+# stripe.PaymentIntent.create(
+#   amount=1000,
+#   currency="usd",
+#   automatic_payment_methods={"enabled": True},
+#   stripe_account='{{CONNECTED_ACCOUNT_ID}}',
+# )
+#
+# stripe.Customer.create(
+#   email="person@example.com",
+#   stripe_account='{{CONNECTED_ACCOUNT_ID}}',
+# )
+
+#
+#
+# stripe.Product.modify(
+#   "prod_OuHo2LgY906tlp",
+#   metadata={"order_id": "6735"},
+# )
+
+
+
+
+
 
 
 
@@ -46,6 +91,8 @@ class StoreData():
             if each['id'] != id:  # changes to 'if each.id != id:' when 'storedata.product' is used above.
                 items_may_like.append(each)
         return items_may_like[:6]
+
+
 
 
 
