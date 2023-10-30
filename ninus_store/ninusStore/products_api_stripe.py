@@ -94,7 +94,6 @@ class StoreData():
             each_price_id = product["default_price"]
             each_prices = round(((int(stripe.Price.retrieve(each_price_id)["unit_amount"])) / 100), 2)
             product["price"] = each_prices
-            print(product)
             # product = self.product.get()
             return product
         except:
@@ -121,8 +120,8 @@ class StoreData():
 class CartData():
     def __init__(self):
         pass
-    def update_cart(self,product_id,product_name,product_img_url,product_type,product_size,product_quantity,product_price):
-        cart_item = Cart( product_id=product_id,product_name=product_name,product_img_url=product_img_url,product_type=product_type,product_size=product_size,product_quantity=product_quantity,product_price=product_price)
+    def update_cart(self,product_id,product_name,product_img_url,product_type,product_size,product_quantity,product_price,product_price_id):
+        cart_item = Cart( product_id=product_id,product_name=product_name,product_img_url=product_img_url,product_type=product_type,product_size=product_size,product_quantity=product_quantity,product_price=product_price,product_price_id=product_price_id)
         cart_item.save()
     def get_cart_items(self):
         return Cart.objects.all()

@@ -74,11 +74,11 @@ data =["https://images.unsplash.com/photo-1683849117195-83517b362436?auto=format
 #     print(data[index])
 #     stripe.Product.create(id=indx,name="White Tee",metadata={"collectn_name":"Jackets and tops"}, description=f"{indx}", images=[data[index]], default_price_data = {"unit_amount_decimal":"19995", "currency":"aud"},url=data[index])
 #     #stripe.Product.delete(f"{indx}")
-product=stripe.Product.retrieve("1")
-each_price_id = product["default_price"]
-each_prices = round(((int(stripe.Price.retrieve(each_price_id)["unit_amount"])) / 100), 2)
-product["price"] = each_prices
-print(product)
+# product=stripe.Product.retrieve("1")
+# each_price_id = product["default_price"]
+# each_prices = round(((int(stripe.Price.retrieve(each_price_id)["unit_amount"])) / 100), 2)
+# product["price"] = each_prices
+# print(product)
 
 # product=stripe.Product.search(query="metadata['collectn_name']:'Jackets and tops'",limit=20)
 # print(len(product))

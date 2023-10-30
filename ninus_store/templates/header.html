@@ -71,7 +71,7 @@
                             </div>
                             <div class="col col-sm col-3 d-flex justify-content-end align-items-center pl-0 mr-2">
                                 <div class="col d-flex justify-content-end align-items-center p-0 m-0" >
-                                   <p class="p-0 m-0"> <a class="p-0 m-0" data-method="delete"  href=" {% url 'items_cart' product_id=eachitem.product_id  in_cart_id=eachitem.id %}"><b>x</b></a> </p>
+                                   <p class="p-0 m-0"> <a class="p-0 m-0" data-method="delete"  href=" {% url 'delete_items_cart' product_id=eachitem.product_id  in_cart_id=eachitem.id %}"><b>x</b></a> </p>
                                 </div>
                             </div>
                           </div>
@@ -83,42 +83,6 @@
                         </div>
                       </div><!-- end item 1-->
                         {% endfor %}
-<!--                      <div class="col d-flex justify-content-center ml-2 pl-2 pr-4">&lt;!&ndash; Item2 start&ndash;&gt;-->
-<!--                        <div class="row dropdown-item col d-flex justify-content-center mx-0 pl-0 pr-1">-->
-<!--                          <div class="row ">-->
-<!--                            <div class="col  col-3 px-0 pt-1 ml-2 ">-->
-<!--                                <div class="m-0 my-1 px-2">-->
-<!--                                    <img class="img-thumbnail p-1 m-0" src="https://images.unsplash.com/photo-1581655353564-df123a1eb820?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHdoaXRlJTIwdGVlfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" >-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="m-0 px-0 col col-sm col-3 d-flex align-items-center">-->
-<!--                              <div class="container ml-0 px-0">-->
-<!--                                <div class="row m-0 p-0 bg-light d-flex justify-content-center ">-->
-<!--                                   <p class="fs-6 m-0 p-0"><b>White Tee</b></p>-->
-<!--                                </div>-->
-<!--                                <div class="row m-0  p-0 bg-light d-flex justify-content-center " >-->
-<!--                                   <p class=" m-0 p-0 fs-6">Quantity: 1</p>-->
-<!--                                </div>-->
-<!--                                 <div class="row m-0 p-0 bg-light d-flex justify-content-center " >-->
-<!--                                   <p class=" m-0 p-0 fs-6"><b>$49.65</b></p>-->
-<!--                                </div>-->
-<!--                              </div>-->
-<!--                            </div>-->
-<!--                            <div class="col col-sm col-3 d-flex justify-content-end align-items-center pl-0 mr-2">-->
-<!--                                <div class="col d-flex justify-content-end align-items-center p-0 m-0" >-->
-<!--                                   <p class="p-0 m-0"> <a class="p-0 m-0" href="#"><b>x</b></a> </p>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                          </div>-->
-<!--                          <div class="row mx-0 px-0 bg-dark w-100 mt-1">-->
-<!--                            <div class="col col-sm col-6  bg-dark border mx-0 px-0">-->
-<!--                                &lt;!&ndash;                    this empty div provides a hr&ndash;&gt;-->
-<!--                            </div>-->
-<!--                          </div>-->
-<!--                        </div>-->
-<!--                      </div>&lt;!&ndash; end item 2&ndash;&gt;-->
-                        <!--Should end forloop here for back end-->
-
                         <div class="row  col pr-0 mr-0">
                             <div class="col col-3 my-2 d-flex align-items-center">
                                TOTAL
@@ -136,9 +100,12 @@
                             <div class="col-6 my-2 d-flex align-items-center pr-0 mr-0">
                                 <a href="" class="">VIEW CART  ➝</a>
                             </div>
-                            <div class="col-6 my-2 pl-0 ml-0">
-                               <a href="#" class="my-2 form-control btn btn-outline-dark" >CHECKOUT</a>
-                            </div>
+                            <form class="col-6 my-2 pl-0 ml-0" action="{% url 'checkout' %}" method="POST">
+                                {% csrf_token %}
+                                <div>
+                                   <button type="submit" class="my-2 form-control btn btn-outline-dark" >CHECKOUT</button>
+                                </div>
+                            </form>
                         </div>
                     </div><!-- end checkout list -->
                 </div>

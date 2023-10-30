@@ -6,9 +6,9 @@ from django.contrib import messages
 from .forms import LoginForm, SignUpForm
 from django.contrib.auth.models import User
 # from .products_api import StoreData, CartData
-from .products_api_stripe import StoreData, CartData
-import requests
-import stripe
+from .products_api_stripe import StoreData, CartData,stripe
+# import requests
+
 
 
 storedata = StoreData() #initializes store data in products_api
@@ -18,18 +18,6 @@ YOUR_DOMAIN = 'http://localhost:8000'
 
 
 # # @app.route('/create-checkout-session', methods=['POST'])
-def create_checkout_session():
-    try:
-        checkout_session = stripe.checkout.Session.create(
-            line_items=[{'price': '{{PRICE_ID}}','quantity': 1,},],
-            mode='payment',
-            success_url=YOUR_DOMAIN + '/checkout.html',
-            cancel_url=YOUR_DOMAIN + '/cancel.html',
-        )
-    except Exception as e:
-        return str(e)
-    return HttpResponseRedirect(reverse(checkout_session.url), code=303)
-
 
 
 
@@ -74,7 +62,8 @@ def product_detail(request,id):
         product_size = request.POST.get("product_size")
         product_quantity = request.POST.get("quantity")
         product_price = spec_product.price
-        cartdata.update_cart( product_id= product_id,product_name=product_name,product_img_url=product_img_url,product_type=product_type,product_size=product_size,product_quantity=product_quantity,product_price=product_price)
+        product_price_id = spec_product.default_price
+        cartdata.update_cart( product_id= product_id,product_name=product_name,product_img_url=product_img_url,product_type=product_type,product_size=product_size,product_quantity=product_quantity,product_price=product_price,product_price_id=product_price_id)
         context["cart_items"] = cartdata.get_cart_items()
         context["no_of_cart_items"] = cartdata.count_cart_items()
         return render(request,"product_detail.html", context=context)
@@ -82,7 +71,7 @@ def product_detail(request,id):
 
 
 
-def items_cart(request,product_id,in_cart_id):
+def delete_items_cart(request,product_id,in_cart_id):
     context={}
     id = int(product_id)
     in_cart_id=in_cart_id
@@ -97,7 +86,22 @@ def items_cart(request,product_id,in_cart_id):
 
 
 
-
+def create_checkout_session(request):
+    present_cart_items = cartdata.get_cart_items()
+    for cart_item in present_cart_items:
+        try:
+            price_id= cart_item.product_price_id
+            quantity=cart_item.product_quantity
+            checkout_session = stripe.checkout.Session.create(
+                line_items=[{'price': '{{PRICE_ID}}','quantity': 1,},],
+                mode='payment',
+                success_url=YOUR_DOMAIN + '/checkout.html',
+                cancel_url=YOUR_DOMAIN + '/cancel.html',
+            )
+        except Exception as e:
+            return str(e)
+        return HttpResponseRedirect(reverse(checkout_session.url), code=303)
+        # return render(request, "home.html")
 
 
 

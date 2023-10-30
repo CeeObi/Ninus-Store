@@ -69,10 +69,12 @@ class Cart(models.Model):
     product_id = models.IntegerField()
     product_name = models.CharField(max_length=255)
     product_img_url = models.CharField(max_length=2000)
+    product_price_id = models.CharField(max_length=255,null=True)
     product_price = models.FloatField(max_length=255,null=True)
     product_type = models.CharField(max_length=255)
     product_size = models.CharField(max_length=255)
     product_quantity = models.IntegerField()
+
 
 
 
