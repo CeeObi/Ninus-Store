@@ -5,7 +5,7 @@ import random
 import stripe
 
 
-import stripe
+
 
 
 
@@ -20,8 +20,8 @@ stripe.api_key="sk_test_51O6SWXGkFiiSNOyUdkF60f3ZGLj6X6zzX9Nskb2Psxqv67Am4z6oLR3
 
 
 
-product=stripe.Product.retrieve("1")
-print(product)
+
+
 
 # stripe.PaymentIntent.create(
 #   amount=1000,
@@ -63,14 +63,25 @@ class StoreData():
     def get_collection(self,collname):
         try:
             if collname.lower() == "all collections".lower():
-                all_collections = data_index     #self.products     # data_index
+                all_collections = stripe.Product.list(limit=100)
+                for each in all_collections:
+                    each_price_id = each["default_price"]
+                    each_prices = round(((int(stripe.Price.retrieve(each_price_id)["unit_amount"]))/100),2)
+                    each["price"]=each_prices
+                #all_collections = data_index     #self.products     # data_index
                 return { "collectionstitle":collname.title(),
                          "collectionslist":all_collections }
             else:
-                all_collections=[]
-                for product in self.products:
-                    if product.collection.col_name.lower() == collname.lower():
-                        all_collections.append(product)
+                all_collections = stripe.Product.search(query=f"metadata['collectn_name']: '{collname}'", limit=20)
+                for each in all_collections:
+                    each_price_id = each["default_price"]
+                    each_prices = round(((int(stripe.Price.retrieve(each_price_id)["unit_amount"]))/100),2)
+                    each["price"]=each_prices
+                #
+                # all_collections=[]
+                # for product in self.products:
+                #     if product.collection.col_name.lower() == collname.lower():
+                #         all_collections.append(product)
                 return {"collectionstitle": collname.title(),
                         "collectionslist": all_collections}
         except:
@@ -79,16 +90,27 @@ class StoreData():
              "collectionslist": all_collections}
     def get_product(self,product_id):
         try:
-            product = self.product.get(id=product_id)
+            product = stripe.Product.retrieve(id=str(product_id))
+            each_price_id = product["default_price"]
+            each_prices = round(((int(stripe.Price.retrieve(each_price_id)["unit_amount"])) / 100), 2)
+            product["price"] = each_prices
+            print(product)
+            # product = self.product.get()
             return product
         except:
             return
     def get_random_products(self,id):
-        colctn_data = data_index #Product.objects.all()
-        random_data = random.choices(colctn_data, k=7)
+        colctn_data = stripe.Product.list(limit=100)
+        list_colctn_data=[]
+        for each in colctn_data: #Product.objects.all()
+            list_colctn_data.append(each)
+        random_data = random.choices(list_colctn_data, k=7)
         items_may_like = []
         for each in random_data[:6]:
             if each['id'] != id:  # changes to 'if each.id != id:' when 'storedata.product' is used above.
+                each_price_id = each["default_price"]
+                each_prices = round(((int(stripe.Price.retrieve(each_price_id)["unit_amount"])) / 100), 2)
+                each["price"] = each_prices
                 items_may_like.append(each)
         return items_may_like[:6]
 

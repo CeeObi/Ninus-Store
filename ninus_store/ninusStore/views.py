@@ -5,7 +5,8 @@ from django.urls import reverse
 from django.contrib import messages
 from .forms import LoginForm, SignUpForm
 from django.contrib.auth.models import User
-from .products_api import StoreData, CartData
+# from .products_api import StoreData, CartData
+from .products_api_stripe import StoreData, CartData
 import requests
 import stripe
 
@@ -16,7 +17,7 @@ cartdata = CartData()
 YOUR_DOMAIN = 'http://localhost:8000'
 
 
-# @app.route('/create-checkout-session', methods=['POST'])
+# # @app.route('/create-checkout-session', methods=['POST'])
 def create_checkout_session():
     try:
         checkout_session = stripe.checkout.Session.create(
@@ -56,17 +57,19 @@ def cart(request):
 
 def product_detail(request,id):
     context={}
-    spec_product = storedata.get_product(product_id=id)
     id = int(id)
+    spec_product = storedata.get_product(product_id=id)
+    print(spec_product)
     # For the GET method
     context["spec_product"] = spec_product
+    print(context["spec_product"])
     context["cntx_data"] = storedata.get_random_products(id=id)
     context["cart_items"] = cartdata.get_cart_items()
     context["no_of_cart_items"] = cartdata.count_cart_items()
     if request.method == "POST":
         product_id = id
-        product_name = spec_product.prod_name
-        product_img_url = spec_product.img_url
+        product_name = spec_product.name
+        product_img_url = spec_product.url
         product_type = request.POST.get("options")
         product_size = request.POST.get("product_size")
         product_quantity = request.POST.get("quantity")

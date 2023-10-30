@@ -1,3 +1,5 @@
+import random
+
 import stripe
 
 stripe.api_key="sk_test_51O6SWXGkFiiSNOyUdkF60f3ZGLj6X6zzX9Nskb2Psxqv67Am4z6oLR30Z7STFLcNgyKi9lqWDEjzTQOr5WadfIFl00JGiUcrMa"
@@ -70,8 +72,29 @@ data =["https://images.unsplash.com/photo-1683849117195-83517b362436?auto=format
 # for index in range(0, len(data)):
 #     indx = index + 1
 #     print(data[index])
-#     stripe.Product.create(id=indx,name="White Tee",description=indx,images=[data[index]], default_price_data = {"unit_amount_decimal":"19995", "currency":"aud"})
+#     stripe.Product.create(id=indx,name="White Tee",metadata={"collectn_name":"Jackets and tops"}, description=f"{indx}", images=[data[index]], default_price_data = {"unit_amount_decimal":"19995", "currency":"aud"},url=data[index])
 #     #stripe.Product.delete(f"{indx}")
-# product=stripe.Product.retrieve("1")
-# print(product)
+product=stripe.Product.retrieve("1")
+each_price_id = product["default_price"]
+each_prices = round(((int(stripe.Price.retrieve(each_price_id)["unit_amount"])) / 100), 2)
+product["price"] = each_prices
+print(product)
 
+# product=stripe.Product.search(query="metadata['collectn_name']:'Jackets and tops'",limit=20)
+# print(len(product))
+#
+# collections_name="Jackets and tops"
+# product=stripe.Product.search(query=f"metadata['collectn_name']: '{collections_name}'",limit=20)
+# print(len(product))
+
+
+# #
+# price=stripe.Price.retrieve("price_1O6nPjGkFiiSNOyUN2zhaWON")
+# print(price)
+# colctn_data = stripe.Product.list(limit=5)
+# list_colctn_data=[]
+# for each in colctn_data: #Product.objects.all()
+#     list_colctn_data.append(each)
+# print(list_colctn_data)
+# # random_data = random.choices(all_products, k=7)
+# print(type(random_data))
