@@ -1,6 +1,6 @@
 from django.contrib.auth import login,authenticate,logout
 from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib import messages
 from .forms import LoginForm, SignUpForm
@@ -14,7 +14,7 @@ from .products_api_stripe import StoreData, CartData,stripe
 storedata = StoreData() #initializes store data in products_api
 cartdata = CartData()
 
-YOUR_DOMAIN = 'http://localhost:8000'
+YOUR_DOMAIN = 'https://localhost:8000'
 
 
 # # @app.route('/create-checkout-session', methods=['POST'])
@@ -47,10 +47,8 @@ def product_detail(request,id):
     context={}
     id = int(id)
     spec_product = storedata.get_product(product_id=id)
-    print(spec_product)
     # For the GET method
     context["spec_product"] = spec_product
-    print(context["spec_product"])
     context["cntx_data"] = storedata.get_random_products(id=id)
     context["cart_items"] = cartdata.get_cart_items()
     context["no_of_cart_items"] = cartdata.count_cart_items()
@@ -87,20 +85,24 @@ def delete_items_cart(request,product_id,in_cart_id):
 
 
 def create_checkout_session(request):
-    present_cart_items = cartdata.get_cart_items()
-    for cart_item in present_cart_items:
-        try:
+    try:
+        present_cart_items = cartdata.get_cart_items()
+        line_items = []
+        for cart_item in present_cart_items:
             price_id= cart_item.product_price_id
-            quantity=cart_item.product_quantity
-            checkout_session = stripe.checkout.Session.create(
-                line_items=[{'price': '{{PRICE_ID}}','quantity': 1,},],
-                mode='payment',
-                success_url=YOUR_DOMAIN + '/checkout.html',
-                cancel_url=YOUR_DOMAIN + '/cancel.html',
-            )
-        except Exception as e:
-            return str(e)
-        return HttpResponseRedirect(reverse(checkout_session.url), code=303)
+            quantity=int(cart_item.product_quantity)
+            each_line_purchased = {'price': price_id,'quantity': quantity}
+            line_items.append(each_line_purchased)
+        checkout_session = stripe.checkout.Session.create(
+            line_items=line_items,
+            mode='payment',
+            success_url=YOUR_DOMAIN + '/checkout.html',
+            cancel_url=YOUR_DOMAIN + '/cancel.html',
+        )
+    except Exception as e:
+        return str(e)
+    print(checkout_session.url)
+    return redirect(checkout_session.url, code=303)
         # return render(request, "home.html")
 
 

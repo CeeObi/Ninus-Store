@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path,  re_path
 from django.conf import settings
 from django.conf.urls.static import static
 from . import views
@@ -13,6 +13,5 @@ urlpatterns=[
   path('registration',views.signup_pg,name="signup"),
   path('logout',views.logout_pg,name="logout"),
   path('create-checkout-session',views.create_checkout_session,name="checkout"),
-
 
 ]
