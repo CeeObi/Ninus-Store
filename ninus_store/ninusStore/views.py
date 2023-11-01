@@ -108,9 +108,6 @@ def create_checkout_session(request):
 
 
 
-
-
-
 def login_pg(request):
     logn=LoginForm
     if request.method == "POST":
