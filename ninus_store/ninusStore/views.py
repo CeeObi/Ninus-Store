@@ -6,7 +6,8 @@ from django.contrib import messages
 from .forms import LoginForm, SignUpForm
 from django.contrib.auth.models import User
 # from .products_api import StoreData, CartData
-from .products_api_stripe import StoreData, CartData,stripe
+# from .products_api_stripe import StoreData, CartData,stripe
+from .products_api_stripe_modified import StoreData, CartData,stripe
 # import requests
 
 
@@ -86,6 +87,8 @@ def delete_items_cart(request,product_id,in_cart_id):
 
 def create_checkout_session(request):
     try:
+        global storedata
+        storedata = StoreData()
         present_cart_items = cartdata.get_cart_items()
         line_items = []
         for cart_item in present_cart_items:
@@ -101,9 +104,8 @@ def create_checkout_session(request):
         )
     except Exception as e:
         return str(e)
-    print(checkout_session.url)
     return redirect(checkout_session.url, code=303)
-        # return render(request, "home.html")
+
 
 
 
