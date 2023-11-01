@@ -1,7 +1,4 @@
-
 h2{color:yellow};
-
-
 
 .footer-bg-a{
     background-color: #f2f0f0;
@@ -20,7 +17,6 @@ h2{color:yellow};
      border-color: #1D011D;
      color: #1D011D;
 }
-
 
 .carousel > .carousel-inner > .carousel-item > img{
     width:240px; /* Yeap you can change the width and height*/
@@ -49,7 +45,6 @@ position: relative;
     transition: .5s ease;
     backface-visibility: hidden;
 }
-
 
 .product-hover-overlay-buttons{
   transition: .5s ease;

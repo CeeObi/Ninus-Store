@@ -46,17 +46,17 @@
 
       <div class="col bg-light mt-3 mb-4 ">
         <div class=" mr-5"  >
-          <div class="mb-0 pb-0  ">
+          <div class="mb-0 pb-0 d-flex align-items-center ">
               <nav aria-label="breadcrumb" class="mb-0 mt-2 pb-0">
-                  <ol class="breadcrumb justify-content-start mb-0 pb-0">
+                  <ol class="breadcrumb d-flex justify-content-start align-items-center mb-0 py-1">
                     <li class="breadcrumb-item mb-0 pb-0"><a class="mb-0 pb-0" href="/">Home</a></li>
                     <li class="breadcrumb-item mb-0 pb-0"><a class=" mb-0 pb-0" href="{% url 'catalog' title=spec_product.metadata.collectn_name %}">{{spec_product.metadata.collectn_name}}</a></li>
                     <li class="breadcrumb-item active mb-0 pb-0" aria-current="page">{{spec_product.name}} </li>
                   </ol>
              </nav>
           </div>
-          <div class="mt-0 pt-0">
-            <h1 class="mb-4 mt-0 bg-light bg-gradient ml-2 "> {{spec_product.name}} </h1>
+          <div class="my-0 py-0 ">
+            <h1 class="border-bottom mb-3 py-0 pb-1 bg-light bg-gradient ml-2 "> {{spec_product.name}} </h1>
           </div>
          <div class="d-flex flex-column flex-sm-row align-items-sm-center justify-content-sm-between mb-4 mr-3">
            <ul class="list-inline mb-2 mb-sm-0">
@@ -143,14 +143,16 @@
           </form>
         </div>
       </div><!--  div2 end-->
-    </div><!--  major row1 end-->
-    <div class="row border-top border-bottom">
-      <div id="carouselExampleIndicators2" class="carousel slide carousel-fade col-12" data-ride="carousel" data-interval="false">
-        <div class="carousel-indicators w-25 d-flex justify-content-start" style="position: relative; top: 0%; left:0%; margin:0; ">
-          <button class="btn btn-success active w-50 mt-5 rounded-0 text-info shadow-none" data-target="#carouselExampleIndicators2" data-slide-to="0"  style="border-style: none none solid none; border-width: 10px; background:none;" > Description</button>
-          <button class="btn btn-success w-50 mt-5 rounded-0 text-info shadow-none" data-target="#carouselExampleIndicators2" data-slide-to="1" style="border-style: none none solid none; border-width: 10px; background:none;"> Additional Information</button>
-          <button class="btn btn-success w-50 mt-5 rounded-0 text-info shadow-none" data-target="#carouselExampleIndicators2" data-slide-to="2" style="border-style: none none solid none; border-width: 10px; background:none;">Reviews</button>
-        </div>
+    </div><!--  major Row1 end-->
+    <div class="row "><!--  major Row2 start-->
+      <div id="carouselExampleIndicators2" class="carousel slide carousel-fade col-12 bg-light" data-ride="carousel" data-interval="false">
+          <div class="col-12 border-bottom border-secondary py-0">
+            <div class="carousel-indicators w-25 d-flex justify-content-start my-0 py-0" style="position: relative; top: 0%; left:0%; margin:0; ">
+              <button class="btn btn-secondary active w-50 mt-1 pt-0 rounded-0 text-info shadow-none text-dark" data-target="#carouselExampleIndicators2" data-slide-to="0"  style="border-style: none none solid none; border-width: 2.5px; background:none;" > Description</button>
+              <button class="btn btn-secondary w-50 mt-1 pt-0 rounded-0 text-info shadow-none text-dark" data-target="#carouselExampleIndicators2" data-slide-to="1" style="border-style: none none solid none; border-width: 2.5px; background:none;"> Additional Information</button>
+              <button class="btn btn-secondary w-50 mt-1 pt-0 rounded-0 text-info shadow-none text-dark" data-target="#carouselExampleIndicators2" data-slide-to="2" style="border-style: none none solid none; border-width: 2.5px; background:none;">Reviews</button>
+            </div>
+          </div>
         <div class="carousel-inner">
           <div class="container-fluid carousel-item active mt-4">
             <div class="row">
@@ -315,13 +317,13 @@
          </div>
         </div>
       </div>
-    </div><!--  major row2 end-->
+    </div><!--  major Row2 end-->
     <div class="row "><!--  major row3 start-->
       <div class="container">
-        <div class="row d-flex justify-content-center">
-          <h1>You May Also Like</h1>
+        <div class="row d-flex justify-content-center  ">
+          <h1 class="bg-light mt-2 px-4 rounded py-2 d-flex justify-items-center">You May Also Like</h1>
         </div>
-        <div class="row">
+        <div class="row d-flex justify-content-center">
             {% for each_pic in cntx_data %}
             <div class="product  m-2">
               <div class="product-image">
@@ -352,8 +354,6 @@
               </div>
             </div><!--          end product 1-->
             {% endfor %}
-
-
         </div><!--          end row-->
         </div>
       </div>
