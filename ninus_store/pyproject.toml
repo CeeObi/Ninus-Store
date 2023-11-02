@@ -1,8 +1,0 @@
-[tool.poetry.dependencies]
-python = "^3.7"
-django="^3.2.22"
-gunicorn="^21.2.0"
-psycopg2-binary="^2.9.6"
-stripe="^7.1.0"
-whitenoise="^6.5.0"
-dj-config-url="^0.1.1"
