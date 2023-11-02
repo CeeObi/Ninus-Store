@@ -186,7 +186,6 @@ USE_TZ = True
 STATIC_URL = "/static/"
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
-STATICFILES_DIRS = [BASE_DIR / "static"]
 # This setting tells Django at which URL static files are going to be served to the user.
 # Here, they well be accessible at your-domain.onrender.com/static/...
 # STATICFILES_DIRS = [BASE_DIR / "static"]#if an issues, delete this first
