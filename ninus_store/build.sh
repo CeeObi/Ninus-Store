@@ -2,6 +2,8 @@
 # exit on error
 set -o errexit
 
+poetry install
+
 python install -r requirements.txt
 
 python manage.py collectstatic --no-input
