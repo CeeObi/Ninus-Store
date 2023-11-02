@@ -189,7 +189,7 @@ STATIC_URL = "/static/"
 
 # This setting tells Django at which URL static files are going to be served to the user.
 # Here, they well be accessible at your-domain.onrender.com/static/...
-STATICFILES_DIRS = [BASE_DIR / "static"]#if an issues, delete this first
+# STATICFILES_DIRS = [BASE_DIR / "static"]#if an issues, delete this first
 # Following settings only make sense on production and may break development environments.
 if not DEBUG:
     # Tell Django to copy statics to the `staticfiles` directory
