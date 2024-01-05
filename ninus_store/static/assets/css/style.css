@@ -84,3 +84,14 @@ background-color: #dbd9d9;
     opacity:1;
  }
 
+@media screen {
+    
+}
+
+.headr{
+    /* background-image: url('../../images/background_home.png'); */
+    /* background-size: cover;  */
+    height:800px;
+}
+
+

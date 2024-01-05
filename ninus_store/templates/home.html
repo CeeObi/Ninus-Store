@@ -8,13 +8,16 @@
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}" >
 </head>
 <body >
-<header class="masthead d-flex container-fluid align-items-end justify-content-center" style="background-image: url('./static/images/background_home.png'); background-size: cover; height:850px;">
-    <div class="" style="margin-bottom: 76px" >
-        <div class="border border-secondary shopsbtnpd border-top-0 border-bottom-0 mb-0 pb-0 ">
-            <div class="p-2 mb-0 ">
-                <a class=" btn shopsbtn btn-outline-secondary btn-lg rounded-0 mb-0"   href="{% url 'catalog' title='All Collections' %}">SHOP NOW</a>
-            </div>
-        </div>
+<header class="masthead d-flex p-0 m-0 rounded-0 container-fluid align-items-end justify-content-end card">
+    <img class="  card-img rounded-0" src="{% static 'images/background_home.png' %}" alt="">
+    <div class="card-img-overlay d-flex justify-content-center align-items-end "  >
+        <div class=" d-flex align-self-end mb-0 pb-0 pb-sm-2 mb-sm-2 pb-md-3 mb-md-3 pb-lg-4 mb-lg-4 pb-xxl-5 mb-xxl-5 justify-content-center col-12">
+                <div class=" border col-sm-3 border-secondary border-top-0 border-bottom-0 mb-0 pb-0 align-self-baseline ">
+                    <div class=" col pb-0 p-sm-1 mb-0 ">
+                        <a class=" btn shopsbtn btn-outline-secondary w-100 btn-lg rounded-0 mb-0 fs-6 p-1 p-xxl-3 p-sm-2"   href="{% url 'catalog' title='All Collections' %}">SHOP NOW</a>
+                    </div>
+                </div>
+        </div>        
     </div>
 </header>
 <div>
